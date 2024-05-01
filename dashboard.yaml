@@ -1,0 +1,501 @@
+views:
+  - type: sections
+    max_columns: 4
+    title: Home
+    path: home2
+    sections:
+      - type: grid
+        cards:
+          - type: vertical-stack
+            cards:
+              - type: custom:bubble-card
+                card_type: separator
+                name: Kalender
+                icon: mdi:calendar
+              - type: custom:atomic-calendar-revive
+                enableModeChange: true
+                entities:
+                  - entity: calendar.familie
+                    name: Familie
+                maxDaysToShow: 7
+                hideDuplicates: true
+                showRelativeTime: false
+                hideFinishedEvents: true
+                allDayBottom: true
+                disableCalEventLink: true
+                disableCalLink: true
+                disableCalLocationLink: true
+                showLastCalendarWeek: false
+                calShowDescription: false
+                cardHeight: '%'
+                compactMode: false
+                defaultMode: Event
+          - type: vertical-stack
+            cards:
+              - type: custom:bubble-card
+                card_type: separator
+                name: Wetter
+                icon: mdi:cloud-question
+              - type: custom:clock-weather-card
+                entity: weather.forecast_home
+                temperature_sensor: sensor.aussentemperatur
+                humidity_sensor: sensor.aussentemperatur_2
+                hide_clock: true
+                hide_date: true
+                forecast_rows: 3
+                card_mod:
+                  style: |
+                    ha-card {
+                      --bar-height: 1em !important;
+                    }
+                    clock-weather-card-today-left {
+                      display: none !important;
+                    }
+                    clock-weather-card-today-right {
+                      justify-content: flex-start !important;
+                      height: 2em;
+                    }
+                    clock-weather-card-today-right-wrap-top {
+                      display: none !important;
+                    }
+                    clock-weather-card-today-right-wrap-center::before {
+                      content: "Aktuell:\00a0";
+                    }
+                    clock-weather-card-today-right-wrap-center {
+                      font-size: 1em !important;
+                      font-weight: bold;
+                    }
+          - type: vertical-stack
+            cards:
+              - type: custom:bubble-card
+                card_type: separator
+                name: Energie
+                icon: mdi:lightning-bolt
+              - type: horizontal-stack
+                cards:
+                  - type: custom:power-flow-card-plus
+                    entities:
+                      home: {}
+                      grid:
+                        entity: sensor.momentanverbrauch
+                        display_state: one_way
+                      solar:
+                        entity: sensor.pv
+                        display_zero_state: true
+                    clickable_entities: true
+                    display_zero_lines:
+                      mode: show
+                      transparency: 50
+                      grey_color:
+                        - 189
+                        - 189
+                        - 189
+                    use_new_flow_rate_model: true
+                    w_decimals: 0
+                    kw_decimals: 1
+                    min_flow_rate: 0.75
+                    max_flow_rate: 6
+                    max_expected_power: 5000
+                    min_expected_power: 0.01
+                    watt_threshold: 1000
+                    transparency_zero_lines: 0
+                    dashboard_link: ''
+      - type: grid
+        cards:
+          - type: vertical-stack
+            cards:
+              - type: custom:bubble-card
+                card_type: separator
+                name: Kinderzimmer
+                icon: mdi:teddy-bear
+                styles: |+
+
+              - type: horizontal-stack
+                cards:
+                  - type: custom:bubble-card
+                    card_type: button
+                    button_type: state
+                    entity: sensor.kinderzimmer
+                    icon: mdi:thermometer
+                    name: Temperatur
+                  - type: custom:bubble-card
+                    card_type: button
+                    entity: sensor.kinderzimmer_2
+                    name: Luftfeuchtigkeit
+                    icon: mdi:water-percent
+                    styles: |
+                      .switch-button {
+                        background-color: ${state > '64' ? 'indianred' : ''} !important;
+                      }
+                    show_state: true
+                    show_attribute: false
+                    button_type: state
+              - type: horizontal-stack
+                cards:
+                  - type: custom:bubble-card
+                    card_type: button
+                    entity: light.maiglockchen
+                    icon: mdi:flower-tulip
+                  - type: custom:bubble-card
+                    card_type: empty-column
+              - type: horizontal-stack
+                cards:
+                  - type: custom:bubble-card
+                    card_type: button
+                    button_type: state
+                    entity: binary_sensor.fenster_kinderzimmer
+                    icon: mdi:window-closed-variant
+                    name: Fenster
+                    styles: |
+                      .switch-button {
+                        background-color: ${state === 'on' ? '#e2aa60' : ''} !important;
+                      }
+                  - type: custom:bubble-card
+                    card_type: empty-column
+          - type: vertical-stack
+            cards:
+              - type: custom:bubble-card
+                card_type: separator
+                name: Arbeitszimmer
+                icon: mdi:desk
+              - type: horizontal-stack
+                cards:
+                  - type: custom:bubble-card
+                    card_type: button
+                    button_type: state
+                    entity: sensor.arbeitszimmer
+                    icon: mdi:thermometer
+                    name: Temperatur
+                  - type: custom:bubble-card
+                    card_type: button
+                    button_type: state
+                    entity: sensor.arbeitszimmer_2
+                    name: Luftfeuchtigkeit
+                    icon: mdi:water-percent
+                    styles: |
+                      .switch-button {
+                        background-color: ${state > '64' ? 'indianred' : ''} !important;
+                      }
+              - type: horizontal-stack
+                cards:
+                  - type: custom:bubble-card
+                    card_type: button
+                    entity: switch.schreibtisch_tony
+                    name: Schreibtisch
+                    icon: mdi:desk
+                  - type: custom:bubble-card
+                    card_type: empty-column
+              - type: horizontal-stack
+                cards:
+                  - type: custom:bubble-card
+                    card_type: button
+                    button_type: state
+                    entity: binary_sensor.fenster_arbeitszimmer
+                    icon: mdi:window-closed-variant
+                    name: Fenster
+                    styles: |
+                      .switch-button {
+                        background-color: ${state === 'on' ? '#e2aa60' : ''} !important;
+                      }
+                  - type: custom:bubble-card
+                    card_type: button
+                    entity: climate.heizung_arbeitszimmer_heizung_arbeitszimmer
+                    name: Heizung
+                    icon: mdi:radiator
+                    button_type: state
+                    show_state: true
+                    show_attribute: true
+                    attribute: temperature
+                    show_last_changed: false
+          - type: vertical-stack
+            cards:
+              - type: custom:bubble-card
+                card_type: separator
+                name: Flur
+                icon: mdi:door
+              - type: horizontal-stack
+                cards:
+                  - type: custom:bubble-card
+                    card_type: button
+                    button_type: switch
+                    entity: light.flur
+                    icon: mdi:flower-tulip
+                    name: Schneeglöckchen
+                  - type: custom:bubble-card
+                    card_type: button
+                    button_type: switch
+                    entity: light.mond
+                    name: Mond
+                    icon: mdi:moon-full
+              - type: horizontal-stack
+                cards:
+                  - type: custom:bubble-card
+                    card_type: button
+                    entity: switch.tasmota_2
+                    name: Klingel
+                    icon: mdi:bell
+                    show_state: false
+                  - type: custom:bubble-card
+                    card_type: empty-column
+          - type: vertical-stack
+            cards:
+              - type: custom:bubble-card
+                card_type: separator
+                name: Küche
+                icon: mdi:chef-hat
+              - type: horizontal-stack
+                cards:
+                  - type: custom:bubble-card
+                    card_type: button
+                    button_type: switch
+                    entity: light.esstisch
+                    icon: mdi:ceiling-light
+                    name: ''
+                  - type: custom:bubble-card
+                    card_type: empty-column
+      - type: grid
+        cards:
+          - type: vertical-stack
+            cards:
+              - type: custom:bubble-card
+                card_type: separator
+                name: Wohnzimmer
+                icon: mdi:sofa
+              - type: horizontal-stack
+                cards:
+                  - type: custom:bubble-card
+                    card_type: button
+                    button_type: state
+                    entity: sensor.wohnzimmer_2
+                    icon: mdi:thermometer
+                    name: Temperatur
+                  - type: custom:bubble-card
+                    card_type: button
+                    button_type: state
+                    entity: sensor.wohnzimmer
+                    name: Luftfeuchtigkeit
+                    icon: mdi:water-percent
+                    styles: |
+                      .switch-button {
+                        background-color: ${state > '64' ? 'indianred' : ''} !important;
+                      }
+              - type: horizontal-stack
+                cards:
+                  - type: custom:bubble-card
+                    card_type: button
+                    entity: light.laterne
+                    name: Laterne
+                    icon: mdi:light-flood-down
+                  - type: custom:bubble-card
+                    card_type: button
+                    entity: light.leselampe
+                    button_type: switch
+                    icon: mdi:floor-lamp
+                  - type: custom:bubble-card
+                    card_type: button
+                    entity: switch.medien_wohnzimmer
+                    icon: mdi:youtube-tv
+                    name: Medien
+              - type: horizontal-stack
+                cards:
+                  - type: custom:bubble-card
+                    card_type: button
+                    button_type: switch
+                    entity: fan.deckenventilator
+                    icon: mdi:fan
+                    name: Deckenventilator
+                  - type: custom:bubble-card
+                    card_type: empty-column
+          - type: vertical-stack
+            cards:
+              - type: custom:bubble-card
+                card_type: separator
+                name: Schlafzimmer
+                icon: mdi:bed-king
+              - type: horizontal-stack
+                cards:
+                  - type: custom:bubble-card
+                    card_type: button
+                    button_type: state
+                    entity: sensor.schlafzimmer
+                    icon: mdi:thermometer
+                    name: Temperatur
+                  - type: custom:bubble-card
+                    card_type: button
+                    button_type: state
+                    entity: sensor.schlafzimmer_2
+                    name: Luftfeuchtigkeit
+                    icon: mdi:water-percent
+                    styles: |
+                      .switch-button {
+                        background-color: ${state > '64' ? 'indianred' : ''} !important;
+                      }
+              - type: horizontal-stack
+                cards:
+                  - type: custom:bubble-card
+                    card_type: button
+                    entity: light.nachttisch
+                    name: ''
+                    icon: mdi:lamp
+                  - type: custom:bubble-card
+                    card_type: button
+                    entity: switch.medien_schlafzimmer
+                    icon: mdi:youtube-tv
+                    name: Medien
+              - type: horizontal-stack
+                cards:
+                  - type: custom:bubble-card
+                    card_type: button
+                    button_type: state
+                    entity: binary_sensor.fenster_schlafzimmer
+                    icon: mdi:window-closed-variant
+                    name: Fenster
+                    styles: |
+                      .switch-button {
+                        background-color: ${state === 'on' ? '#e2aa60' : ''} !important;
+                      }
+                  - type: custom:bubble-card
+                    card_type: empty-column
+          - type: vertical-stack
+            cards:
+              - type: custom:bubble-card
+                card_type: separator
+                name: Bad
+                icon: mdi:bathtub
+              - type: horizontal-stack
+                cards:
+                  - type: custom:bubble-card
+                    card_type: button
+                    button_type: state
+                    entity: sensor.bad
+                    icon: mdi:thermometer
+                    name: Temperatur
+                  - type: custom:bubble-card
+                    card_type: button
+                    button_type: state
+                    entity: sensor.bad_2
+                    name: Luftfeuchtigkeit
+                    icon: mdi:water-percent
+                    styles: |
+                      .switch-button {
+                        background-color: ${state > '64' ? 'indianred' : ''} !important;
+                      }
+              - type: horizontal-stack
+                cards:
+                  - type: custom:bubble-card
+                    card_type: button
+                    entity: binary_sensor.fenster_bad
+                    button_type: state
+                    icon: mdi:window-closed-variant
+                    name: Fenster
+                    styles: |
+                      .switch-button {
+                        background-color: ${state === 'on' ? '#e2aa60' : ''} !important;
+                      }
+                  - type: custom:bubble-card
+                    card_type: empty-column
+          - type: vertical-stack
+            cards:
+              - type: custom:bubble-card
+                card_type: separator
+                name: Mehr
+                icon: mdi:dots-horizontal-circle
+              - type: horizontal-stack
+                cards:
+                  - type: custom:bubble-card
+                    card_type: button
+                    tap_action:
+                      action: navigate
+                      navigation_path: '#bring'
+                    button_type: name
+                    name: Bring!
+                    icon: mdi:cart
+                  - type: custom:bubble-card
+                    card_type: button
+                    tap_action:
+                      action: navigate
+                      navigation_path: '#quick'
+                    button_type: name
+                    name: Schnellaktionen
+                    icon: mdi:fast-forward
+              - type: horizontal-stack
+                cards:
+                  - type: custom:bubble-card
+                    card_type: button
+                    button_type: name
+                    name: Sauger
+                    icon: mdi:robot-vacuum
+                    tap_action:
+                      action: navigate
+                      navigation_path: '#vacuum'
+                  - type: custom:bubble-card
+                    card_type: empty-column
+      - type: grid
+        cards:
+          - type: vertical-stack
+            cards:
+              - type: custom:bubble-card
+                card_type: pop-up
+                hash: '#bring'
+                button_type: name
+                name: Bring!
+                icon: mdi:cart
+              - type: todo-list
+                entity: todo.zuhause
+                theme: minimalist-ios-tapbar
+          - type: vertical-stack
+            cards:
+              - type: custom:bubble-card
+                card_type: pop-up
+                hash: '#quick'
+                button_type: name
+                name: Schnellaktionen
+                icon: mdi:fast-forward
+              - type: custom:bubble-card
+                card_type: button
+                entity: automation.alle_lichter_aus
+                icon: mdi:lightbulb-multiple-off
+              - type: custom:bubble-card
+                card_type: button
+                entity: switch.presence_simulation
+                name: Anwesenheitssimulation
+                icon: mdi:walk
+          - type: vertical-stack
+            cards:
+              - type: custom:bubble-card
+                card_type: pop-up
+                hash: '#vacuum'
+                button_type: name
+                name: Sauger
+                icon: mdi:robot-vacuum
+              - type: custom:bubble-card
+                card_type: separator
+                name: Räume saugen
+                icon: mdi:vacuum
+              - type: horizontal-stack
+                cards:
+                  - type: custom:bubble-card
+                    card_type: button
+                    entity: button.dirty_hairy_shortcut_1
+                    name: HWR saugen
+                    icon: ''
+                  - type: custom:bubble-card
+                    card_type: button
+                    entity: button.dirty_hairy_shortcut_2
+                    name: Flur saugen
+              - type: horizontal-stack
+                cards:
+                  - type: custom:bubble-card
+                    card_type: button
+                    entity: button.dirty_hairy_shortcut_3
+                    name: Wohnzimmer saugen
+                    sub_button: []
+                  - type: custom:bubble-card
+                    card_type: empty-column
+              - type: custom:bubble-card
+                card_type: separator
+                name: Übersicht
+                icon: mdi:view-dashboard-outline
+              - type: custom:vacuum-card
+                entity: vacuum.dirty_hairy
+    cards: []
