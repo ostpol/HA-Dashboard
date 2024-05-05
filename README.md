@@ -82,3 +82,31 @@ This is the custom style I used for windows:
   background-color: ${state === 'on' ? '#e2aa60' : ''} !important;
 }
 ```
+
+### Hide completed items on To-do list card
+
+Completed items are still displayed in the To-do list card. They can't be hidden by default.
+
+![Completed list items are displayed](images/to-do-list-default.png)
+
+I used lovelace-card-mod to add some custom CSS to it.
+
+![Completed list items are hidden](images/to-do-list-hidden.png)
+
+This is the full YAML for this card:
+
+```
+type: todo-list
+entity: todo.zuhause
+card_mod:
+  style: |
+    .completed {
+      display: none;
+    }
+    .header:not([role=seperator]) {
+      display: none;
+    }
+    .divider {
+      display: none;
+    }
+```
