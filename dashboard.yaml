@@ -1,3 +1,6 @@
+kiosk_mode:
+  non_admin_settings:
+    kiosk: true
 views:
   - type: sections
     max_columns: 4
@@ -442,7 +445,17 @@ views:
                 icon: mdi:cart
               - type: todo-list
                 entity: todo.zuhause
-                theme: minimalist-ios-tapbar
+                card_mod:
+                  style: |
+                    .completed {
+                      display: none;
+                    }
+                    .header:not([role=seperator]) {
+                      display: none;
+                    }
+                    .divider {
+                      display: none;
+                    }
           - type: vertical-stack
             cards:
               - type: custom:bubble-card
