@@ -3,13 +3,16 @@
 
 This dashboard is displayed on a Fire HD 10 in the book shelf in our hallway.
 
-![HA-Dashboard](images/HA-Dashboard.gif)
+![HA-Dashboard](images/HA-Dashboard.png)
+
+![HA-Dashboard in Action](images/HA-Dashboard.gif)
 
 ## Prerequisites
 - Home Assistant 2024.3 and newer because I used [sections](https://www.home-assistant.io/dashboards/sections/)
 
 ### Integrations
 - [HACS](https://hacs.xyz/) to install cards, integrations and other custom stuff
+- [Time & Date](https://www.home-assistant.io/integrations/time_date/) to display the current time as Sub-button of the calendar separator
 
 ### Cards
 - [atomic-calendar-revive](https://github.com/totaldebug/atomic-calendar-revive)
@@ -33,36 +36,12 @@ type: custom:clock-weather-card
 entity: weather.forecast_home
 temperature_sensor: sensor.aussentemperatur
 humidity_sensor: sensor.aussentemperatur_2
-hide_clock: true
-hide_date: true
+hide_today_section: true
 forecast_rows: 3
 card_mod:
   style: |
-    /* Make the temperature bars smaller */
     ha-card {
       --bar-height: 1em !important;
-    }
-    /* Hide the weather icon */
-    clock-weather-card-today-left {
-      display: none !important;
-    }
-    /* Move the right part of the 'today' section to the left */
-    clock-weather-card-today-right {
-      justify-content: flex-start !important;
-      height: 2em;
-    }
-    /* Hide the current weather */
-    clock-weather-card-today-right-wrap-top {
-      display: none !important;
-    }
-    /* Add a description for the current temperature */
-    clock-weather-card-today-right-wrap-center::before {
-      content: "Aktuell:\00a0";
-    }
-    /* Make the current temperature smaller and bold to look more like the other cards */
-    clock-weather-card-today-right-wrap-center {
-      font-size: 1em !important;
-      font-weight: bold;
     }
 ```
 

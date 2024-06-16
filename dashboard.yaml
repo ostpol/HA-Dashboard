@@ -15,12 +15,17 @@ views:
                 card_type: separator
                 name: Kalender
                 icon: mdi:calendar
+                sub_button:
+                  - entity: sensor.time
+                    show_state: true
+                    show_icon: false
+                    show_background: false
               - type: custom:atomic-calendar-revive
                 enableModeChange: true
                 entities:
                   - entity: calendar.familie
                     name: Familie
-                maxDaysToShow: 7
+                maxDaysToShow: 4
                 hideDuplicates: true
                 showRelativeTime: false
                 hideFinishedEvents: true
@@ -39,34 +44,21 @@ views:
                 card_type: separator
                 name: Wetter
                 icon: mdi:cloud-question
+                sub_button:
+                  - entity: sensor.aussentemperatur
+                    show_state: true
+                    show_icon: false
+                    show_background: false
               - type: custom:clock-weather-card
                 entity: weather.forecast_home
                 temperature_sensor: sensor.aussentemperatur
                 humidity_sensor: sensor.aussentemperatur_2
-                hide_clock: true
-                hide_date: true
+                hide_today_section: true
                 forecast_rows: 3
                 card_mod:
                   style: |
                     ha-card {
                       --bar-height: 1em !important;
-                    }
-                    clock-weather-card-today-left {
-                      display: none !important;
-                    }
-                    clock-weather-card-today-right {
-                      justify-content: flex-start !important;
-                      height: 2em;
-                    }
-                    clock-weather-card-today-right-wrap-top {
-                      display: none !important;
-                    }
-                    clock-weather-card-today-right-wrap-center::before {
-                      content: "Aktuell:\00a0";
-                    }
-                    clock-weather-card-today-right-wrap-center {
-                      font-size: 1em !important;
-                      font-weight: bold;
                     }
           - type: vertical-stack
             cards:
@@ -255,7 +247,11 @@ views:
                     icon: mdi:ceiling-light
                     name: ''
                   - type: custom:bubble-card
-                    card_type: empty-column
+                    card_type: button
+                    button_type: switch
+                    entity: switch.kueche_warmwasser_kueche_warmwasser_warm
+                    icon: mdi:faucet-variant
+                    name: ''
       - type: grid
         cards:
           - type: vertical-stack
@@ -505,6 +501,20 @@ views:
                     sub_button: []
                   - type: custom:bubble-card
                     card_type: empty-column
+              - type: custom:bubble-card
+                card_type: separator
+                name: Räume wischen
+                icon: mdi:liquid-spot
+              - type: horizontal-stack
+                cards:
+                  - type: custom:bubble-card
+                    card_type: button
+                    entity: button.dirty_hairy_shortcut_5
+                    name: Flur wischen
+                  - type: custom:bubble-card
+                    card_type: button
+                    entity: button.dirty_hairy_shortcut_4
+                    name: Wohnzimmer wischen
               - type: custom:bubble-card
                 card_type: separator
                 name: Übersicht
