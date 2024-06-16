@@ -29,7 +29,7 @@ This dashboard is displayed on a Fire HD 10 in the book shelf in our hallway.
 Noteworthy customizations I made.
 
 ### clock-weather-card
-I was looking for a weather card as compact as possible. clock-weather-card was a good start, but with its default settings, it wasn't compact enough for me. I used lovelace-card-mod to add some custom CSS to it. I assume it is pretty hacky, but it works. This is the full YAML for this card:
+I was looking for a weather card that was as compact as possible. The clock-weather-card was a good start, but with its default settings, it wasn't compact enough for me. I used lovelace-card-mod to add some custom CSS to it. It was pretty hacky until I discovered Bubble-Card's sub-buttons. With this, I was able to get rid of most of the custom CSS and simply display the current temperature as a sub-button of the calendar separator. Here is the full YAML for this card:
 
 ```
 type: custom:clock-weather-card
